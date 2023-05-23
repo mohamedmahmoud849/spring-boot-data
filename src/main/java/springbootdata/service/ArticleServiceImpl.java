@@ -27,6 +27,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> getAllArticles() {
+        //Pagination
         Iterable<Article> iterable = repo.findAll();
         return Streamable.of(iterable).toList();
 
@@ -40,8 +41,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> getArticlesByAuthorName(String authorName) {
-
-
         List<Article> articleList = new ArrayList<>();
         for (Article article : repo.findAllByName(authorName)) {
             if (authorName.equals(article.getAuthor())) {

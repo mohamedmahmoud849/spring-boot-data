@@ -2,6 +2,7 @@ package springbootdata.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import springbootdata.errorhandlling.NotFoundException;
 import springbootdata.model.Author;
 import springbootdata.repository.AuthorDataRepo;
 
@@ -21,7 +22,10 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author addAuthor(Author author) {
-        return repo.save(author);
+        if (getAuthorById(author.getId()) == null) {
+            return repo.save(author);
+        }
+        throw new NotFoundException(String.format("User Already Exist", author.getId()));
     }
 
 
