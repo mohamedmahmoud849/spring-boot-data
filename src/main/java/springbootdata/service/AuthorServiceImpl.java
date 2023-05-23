@@ -17,15 +17,15 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Author getAuthorById(Long id) {
         Optional<Author> author = repo.findById(id);
-        return author.orElse(null);
+        return author.orElseThrow(() -> new NotFoundException(String.format("The Author with id '%s' was not found", id)));
     }
 
     @Override
     public Author addAuthor(Author author) {
-        if (getAuthorById(author.getId()) == null) {
-            return repo.save(author);
-        }
-        throw new NotFoundException(String.format("User Already Exist", author.getId()));
+
+
+//        throw new NotFoundException(String.format("User with id : '%s' Already Exist", author.getId()));
+        return repo.save(author);
     }
 
 
