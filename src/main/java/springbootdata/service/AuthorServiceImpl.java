@@ -13,6 +13,9 @@ public class AuthorServiceImpl implements AuthorService {
     @Autowired
     private AuthorDataRepo repo;
 
+    public AuthorServiceImpl(AuthorDataRepo repo) {
+        this.repo = repo;
+    }
 
     @Override
     public Author getAuthorById(Long id) {
